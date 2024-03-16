@@ -4,7 +4,7 @@ const faker = new Faker({
     locale: [es, en]
 });
 
- const generateUser = () => {
+export const generateUser = () => {
     const numOfProducts = parseInt(faker.string.numeric(1, {bannedDigits: ['0']}));
     const products = [];
     for(let i=0; i <numOfProducts; i++){
@@ -20,7 +20,7 @@ const faker = new Faker({
     }
 }
 
-const generateProduct = () => {
+export const generateProduct = () => {
     return {
         title: faker.commerce.productName(),
         code: faker.string.alphanumeric({length: 10}).toUpperCase(),
@@ -32,4 +32,3 @@ const generateProduct = () => {
         id: faker.database.mongodbObjectId(),
     }
 }
-export default {generateUser,generateProduct};

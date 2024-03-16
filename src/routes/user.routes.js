@@ -1,14 +1,20 @@
 import { Router } from "express";
-import generateUser from '../utils/mock.js';
+import { generateUser } from '../utils/mock.js';
+import { errorDictionary } from '../middleware/errorMiddleware.js';
 
 const userRoutes = Router();
 
-userRoutes.get('/',(req, res)=>{
-    const users = [];
-    for(let i=0;i<100;i++){
-        users = generateUser();
+userRoutes.get('/', (req, res, next) => {
+    try {
+        const users = [];
+        for(let i = 0; i < 100; i++){
+            users.push(generateUser());
+        }
+        res.json({ status: 'success', payload: users });
+    } catch (error) {
+        const errorMessage = errorDictionary[error.message] || 'An unexpected error occurred';
+        res.status(500).json({ status: 'error', message: errorMessage });
     }
-    res.render = {status:'success',playload:users};
 });
 
 export default userRoutes;
