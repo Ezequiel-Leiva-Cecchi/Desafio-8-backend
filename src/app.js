@@ -2,12 +2,10 @@ import express from "express";
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
 import productsRoutes from "./routes/product.routes.js";
-import {customErrors} from "./middleware/errorMiddleware.js";
+import { customErrors } from "./middleware/errorMiddleware.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
-const MONGODB_URL = process.env.MONGODB_URL;
-const SESSION_SECRET = process.env.SESSION_SECRET;
 
 const app = express();
 
@@ -16,8 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use(customErrors);
-app.use('/api/user',userRoutes);
-app.use('/api/products', productsRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/products', productsRoutes); 
+
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
 });
