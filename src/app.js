@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
-
+import productsRoutes from "./routes/product.routes.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use('/api/user',userRoutes);
+app.use('/api/products', productsRoutes);
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
 });
