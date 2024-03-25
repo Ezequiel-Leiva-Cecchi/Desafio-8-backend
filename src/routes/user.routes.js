@@ -14,6 +14,7 @@ userRoutes.get('/', (req, res, next) => {
     } catch (error) {
         const errorMessage = errorDictionary[error.message] || 'An unexpected error occurred';
         res.status(500).json({ status: 'error', message: errorMessage });
+        next(error);
     }
 });
 
